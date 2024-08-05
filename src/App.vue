@@ -92,8 +92,7 @@ const change = {
   cancle: (item) => {
     item.isEdit = false
   },
-  delete: (item) => {
-    const index = items.value.findIndex((i) => i.id === item.id)
+  delete: (index) => {
     items.value.splice(index, 1)
   }
 }
@@ -109,11 +108,11 @@ const change = {
         <th scope="col">庫存</th>
       </tr>
     </thead>
-    <tbody v-for="item in items" :key="item.id">
+    <tbody v-for="(item, index) in items" :key="item.id">
       <td @dblclick="change.on(item)">
         <dev v-if="!item.isEdit">
           {{ item.name }}
-          <button type="buttom" @click="change.delete(item)">刪除</button>
+          <button type="buttom" @click="change.delete(index)">刪除</button>
         </dev>
         <dev v-else>
           <input type="text" v-model="temp" />
